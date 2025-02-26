@@ -68,8 +68,7 @@ Click on the link to interact with the chatbot! 🚀
 
 If **Mistral-7B** runs out of memory, the chatbot **uses Hugging Face's Zephyr-7B API** as a fallback.
 
-```python
-client = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
+- client = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
 
 
 ## 🛠️ How It Works
@@ -78,7 +77,7 @@ client = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
 - **Streams real-time responses** to improve user experience.
 
 ## 📜 Example Conversation
-```plaintext
+
 User: Hello!  
 Bot: Hello! How can I help you today? 😊  
 
