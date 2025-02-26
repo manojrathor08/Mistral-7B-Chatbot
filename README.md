@@ -13,19 +13,19 @@ A lightweight, optimized **Mistral-7B** chatbot with **8-bit quantization (BitsA
 ## 📌 Installation & Setup
 
 ### **1️⃣ Clone the Repository**
-```bash
-git clone https://github.com/manojrathor08/Mistral-7B-Chatbot.git
-cd Mistral-7B-Chatbot
+
+- git clone https://github.com/manojrathor08/Mistral-7B-Chatbot.git
+- cd Mistral-7B-Chatbot
 
 ### **2️⃣ Install Dependencies**
 Ensure you have **Python 3.9+** and install the required libraries:
 
-```bash
-pip install torch transformers gradio huggingface_hub bitsandbytes
+
+- pip install torch transformers gradio huggingface_hub bitsandbytes
 
 ### **3️⃣ Run the Chatbot**
-```bash
-python3 app.py
+
+- python3 app.py
 
 The chatbot will launch locally. You’ll see a link like:
 
