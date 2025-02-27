@@ -2,6 +2,7 @@ import gradio as gr
 from llm_chat import generate_response  # Import LLM function
 from huggingface_hub import InferenceClient
 import gradio as gr
+from huggingface_hub import InferenceClient
 
 client = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
 
