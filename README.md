@@ -3,8 +3,7 @@ A lightweight, optimized **Mistral-7B** chatbot with **8-bit quantization (BitsA
 ## 🔥 Features
 ✅ **8-bit quantization** (with BitsAndBytes) for **low-VRAM** usage.  
 ✅ **PyTorch compilation (`torch.compile()`)** for **faster inference**.  
-✅ **Context-aware chat history** with conversation **summarization**.  
-✅ **Multi-turn conversations** with **Zephyr-7B API fallback**.  
+✅ **Context-aware chat history** with conversation **summarization**.   
 ✅ **Gradio UI** for a seamless chatbot experience.  
 ✅ **Optimized GPU performance with `torch.backends.cudnn.benchmark = True`**.  
 
@@ -64,11 +63,6 @@ Click on the link to interact with the chatbot! 🚀
 - **Temperature:** `0.1-4.0`
 - **Top-p Sampling:** `0.1-1.0`
 
-## 🔗 API Integration (Zephyr-7B)
-
-If **Mistral-7B** runs out of memory, the chatbot **uses Hugging Face's Zephyr-7B API** as a fallback.
-
-- client = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
 
 
 ## 🛠️ How It Works
