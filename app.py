@@ -1,45 +1,34 @@
 import gradio as gr
 from llm_chat import generate_response  # Import LLM function
-from huggingface_hub import InferenceClient
 import gradio as gr
-
-client = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
 
 MAX_HISTORY = 2  # Keep last 5 exchanges
 SUMMARIZE_AFTER = 3  # Summarize after every 6 exchanges
-
 def summarize_conversation(history):
     """
     Summarizes the conversation to maintain context efficiently.
     """
     summary_prompt = "Summarize this conversation briefly:\n\n"
-    
+
     for user_msg, bot_reply in history:
         summary_prompt += f"User: {user_msg}\nAssistant: {bot_reply}\n"
 
     summary_prompt += "\nSummary:"
-    
-    # Generate the summary using the same model
-    summary = ""
-    for msg in client.chat_completion(
-        [{"role": "user", "content": summary_prompt}], 
-        max_tokens=100,  # Limit summary length
-        temperature=0.3,  # Lower temp for consistency
-    ):
-        summary += msg.choices[0].delta.content
 
+    # Use Mistral-7B to generate summary
+    summary = generate_response(summary_prompt)  
     return summary.strip()
 
 def respond(message, history, system_message, max_tokens, temperature, top_p):
     if history is None:
         history = []
 
-    # Summarize conversation if history is long
+    # Summarize conversation if needed
     if len(history) >= SUMMARIZE_AFTER:
-        summary = summarize_conversation(history[:SUMMARIZE_AFTER])  # Summarize only the first N messages
-        history = [(f"Summary: {summary}", "")] + history[-MAX_HISTORY:]  # Keep summary + latest history
+        summary = summarize_conversation(history[:SUMMARIZE_AFTER])
+        history = [(f"Summary: {summary}", "")] + history[-MAX_HISTORY:]
 
-    # Format conversation for Zephyr-7B
+    # Format the conversation
     formatted_history = [{"role": "system", "content": system_message}]
 
     for user_msg, bot_reply in history:
@@ -48,24 +37,13 @@ def respond(message, history, system_message, max_tokens, temperature, top_p):
 
     formatted_history.append({"role": "user", "content": message})
 
-    # Get response from Zephyr-7B
-    response = ""
-    for msg in client.chat_completion(
-        formatted_history,  
-        max_tokens=max_tokens,
-        stream=True,
-        temperature=temperature,
-        top_p=top_p,
-    ):
-        token = msg.choices[0].delta.content
-        response += token
-        yield response
+    # Generate response using Mistral-7B
+    response = generate_response(message)  
+    yield response  
 
-    history.append((message, response))  # Maintain history
+    history.append((message, response))  
+    return history  
 
-    return history  # Return updated history
-
-# Create Gradio ChatInterface
 interface = gr.ChatInterface(
     fn=respond,
     title="Mistral-7B Chatbot 🤖",
@@ -80,3 +58,4 @@ interface = gr.ChatInterface(
 )
 
 interface.launch(share=True)
+
