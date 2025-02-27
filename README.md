@@ -72,15 +72,7 @@ Click on the link to interact with the chatbot! 🚀
 
 ## 📜 Example Conversation
 
-User: Hello!  
-Bot: Hello! How can I help you today? 😊  
-
-User: What is Machine Learning?  
-Bot: Machine learning is a branch of AI that allows systems to learn from data without being explicitly programmed...  
-
-User: Can you summarize our conversation?  
-Bot: Sure! We talked about greetings and the basics of machine learning.  
-
+![Chatbot Conversation](images/chatbot_image.png)
 
 ## 📌 Contributing
 Want to improve the chatbot? **Contributions are welcome!** 🚀
