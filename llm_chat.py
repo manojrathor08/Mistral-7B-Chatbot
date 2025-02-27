@@ -2,8 +2,8 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 import torch
 torch.cuda.empty_cache()
-
 torch.backends.cudnn.benchmark = True  # Optimizes GPU performance
+
 # Load Model and Tokenizer
 model_name = "mistralai/Mistral-7B-Instruct-v0.1"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
